@@ -1,0 +1,38 @@
+{
+  "name": "testrail-xml-formatter",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arbitrary9/TestRailFormatter.git"
+  },
+  "author": "Veaceslav Orlioglo",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@cucumber/query": "^13.2.0",
+    "@teppeis/multimaps": "^3.0.0",
+    "luxon": "^3.5.0",
+    "xmlbuilder": "^15.1.1"
+  },
+  "peerDependencies": {
+    "@cucumber/messages": "*"
+  },
+  "devDependencies": {
+    "@cucumber/message-streams": "^4.0.1",
+    "@cucumber/messages": "^27.2.0",
+    "@types/luxon": "^3.4.2",
+    "@types/node": "^22.13.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "private": true
+}
