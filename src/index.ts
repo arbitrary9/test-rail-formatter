@@ -53,6 +53,9 @@ export default {
                             failureElement.cdata(testCase.failure.stack)
                         }
                     }
+                    if(testCase.testrail_result_steps){
+                        testcaseElement.ele('')
+                    }
                     if (testCase.output) {
                         testcaseElement.ele('system-out').cdata(testCase.output)
                     }

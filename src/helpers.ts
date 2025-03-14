@@ -32,6 +32,11 @@ export function formatStep(step: Step, pickleStep: PickleStep, status: TestStepR
     return text + status.toLowerCase()
 }
 
+export function formatResultStep(step: Step, pickleStep: PickleStep, status: TestStepResultStatus){
+    let text = `${step.keyword.trim()} ${pickleStep.text.trim()}.`
+    return status.toLowerCase() + ':' + text;
+}
+
 export function formatTimestamp(testRunStarted: TestRunStarted | undefined) {
     if (!testRunStarted) {
         return undefined

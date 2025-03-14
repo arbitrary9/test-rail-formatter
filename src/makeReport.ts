@@ -9,7 +9,7 @@ import {
     Query,
 } from '@cucumber/query'
 
-import { countStatuses, durationToSeconds, formatStep, formatTimestamp } from './helpers.js'
+import {countStatuses, durationToSeconds, formatResultStep, formatStep, formatTimestamp} from './helpers.js'
 
 const NAMING_STRATEGY = namingStrategy(
     NamingStrategyLength.LONG,
@@ -32,7 +32,9 @@ interface ReportTestCase {
     name: string
     time: number
     failure?: ReportFailure
-    output: string
+    output: string,
+    properties: TestRailProperties
+    attachment: string
 }
 
 interface ReportFailure {
@@ -40,6 +42,11 @@ interface ReportFailure {
     type?: string
     message?: string
     stack?: string
+}
+
+interface TestRailProperties{
+    testrail_result_steps: string[],
+    testrail_attachments: string[]
 }
 
 export function makeReport(query: Query): ReportSuite {
@@ -81,6 +88,17 @@ function makeTestCases(query: Query): ReadonlyArray<ReportTestCase> {
                     return formatStep(gherkinStep, pickleStep, testStepFinished.testStepResult.status)
                 })
                 .join('\n'),
+            testrail_result_steps: query
+                .findTestStepFinishedAndTestStepBy(testCaseStarted)
+                .filter(([, testStep]) => !!testStep.pickleStepId)
+                .map(([testStepFinished, testStep]) => {
+                    const pickleStep = query.findPickleStepBy(testStep)
+                    assert.ok(pickleStep, 'Expected to find PickleStep by TestStep')
+                    const gherkinStep = query.findStepBy(pickleStep)
+                    assert.ok(gherkinStep, 'Expected to find Step by PickleStep')
+                    return formatResultStep(gherkinStep, pickleStep, testStepFinished.testStepResult.status)
+                }),
+            attachment: ""
         }
     })
 }
