@@ -1,6 +1,6 @@
 {
   "name": "testrail-xml-formatter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "description": "",
   "main": "dist/src/index.js",
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/arbitrary9/TestRailFormatter.git"
+    "url": "git+https://github.com/arbitrary9/TestRailFormatter.git"
   },
   "author": "Veaceslav Orlioglo",
   "license": "MIT",
@@ -34,5 +34,8 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
   },
-  "private": true
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  }
 }
